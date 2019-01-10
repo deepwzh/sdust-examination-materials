@@ -8,5 +8,6 @@
 若想为此仓库提交资料，请克隆本仓库后提Pull Request。
 ## 4. 贡献者列表（排名不分先后）
 - [deepwzh](https://github.com/deepwzh)
+- [LANVNAL](https://github.com/LANVNAL)
 - [lutherlau](https://github.com/lutherlau)
 - [renhongjie](https://github.com/renhongjie)
