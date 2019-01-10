@@ -9,3 +9,4 @@
 ## 4. 贡献者列表（排名不分先后）
 - [deepwzh](https://github.com/deepwzh)
 - [lutherlau](https://github.com/lutherlau)
+- [renhongjie](https://github.com/renhongjie)
