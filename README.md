@@ -23,7 +23,7 @@ TODO:
 
 ## 3. 资源请求
 如果你有需要的资源在本项目中不存在，那么你可以在Issues中提出。维护者会尽量去搜集资料并对改Issue进行跟进反馈。
-## 3. 贡献
+## 4. 贡献
 ### 1. 如何贡献？
 若想为此仓库提交资料，请克隆本仓库后提PR(Pull Request)。
 
@@ -43,7 +43,7 @@ TODO:
 - [lutherlau](https://github.com/lutherlau)
 - [renhongjie](https://github.com/renhongjie)
 
-## 4. 许可与版权
+## 5. 许可与版权
 [CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
 
 本项目为开源非盈利性质的，如果存在资料有**侵权**问题，请私聊项目的维护人员予以删除
