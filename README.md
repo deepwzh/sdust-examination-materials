@@ -43,6 +43,7 @@ TODO:
 - [LANVNAL](https://github.com/LANVNAL)
 - [lutherlau](https://github.com/lutherlau)
 - [renhongjie](https://github.com/renhongjie)
+- [Fazx](https://github.com/Fazx)
 
 ## 5. 许可与版权
 [CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
