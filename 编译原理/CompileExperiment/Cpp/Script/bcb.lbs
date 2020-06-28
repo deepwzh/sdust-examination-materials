@@ -1,0 +1,323 @@
+// borland c++builder
+
+if (IsOption()) {
+	// name
+	SetName("Borland C++Builder");
+
+	// directory
+	SetDirectory("bcb");
+
+	// libraries
+	AddLibrary("yl.lib", 1);
+	AddLibrary("yld.lib", 1);
+	AddLibrary("ylr.lib", 1);
+	AddLibrary("ylrd.lib", 1);
+	AddLibrary("ylri.dll", 1);
+	AddLibrary("ylrid.dll", 1);
+	AddLibrary("ylmt.lib", 1);
+	AddLibrary("ylmtd.lib", 1);
+	AddLibrary("ylmtr.lib", 1);
+	AddLibrary("ylmtrd.lib", 1);
+	AddLibrary("ylmtri.dll", 1);
+	AddLibrary("ylmtrid.dll", 1);
+	AddLibrary("ylvmt.lib", 1);
+	AddLibrary("ylvmtd.lib", 1);
+	AddLibrary("ylvmtr.lib", 1);
+	AddLibrary("ylvmtrd.lib", 1);
+	AddLibrary("ylvmtri.dll", 1);
+	AddLibrary("ylvmtrid.dll", 1);
+
+	// options
+	AddEnumOption("Compiler Version", "Compiler Version");
+	AddEnumItem("Compiler Version", "Version 3", "Version 3");
+	AddEnumItem("Compiler Version", "Version 4", "Version 4");
+	AddEnumItem("Compiler Version", "Version 5", "Version 5");
+	AddEnumItem("Compiler Version", "Version 6", "Version 6");
+	SetEnumOption("Compiler Version", "Version 6");
+	AddBooleanOption("Unicode", 1, "Unicode");
+	AddDirectoryOption("Compiler Bin Directory", "", "CompilerBinDir");
+	AddDirectoryOption("Compiler Include Directory", "", "CompilerIncludeDirectory");
+	AddDirectoryOption("Compiler Library Directory", "", "CompilerLibraryDirectory");
+}
+else {
+	// flags
+	int FLAG_VCL = 0x01;				// vcl
+	int FLAG_MULTITHREADED = 0x02;		// multithreaded
+	int FLAG_RTLDLL = 0x04;				// rtl dll
+	int FLAG_DLL = 0x08;				// dll
+	int FLAG_DEBUG = 0x10;				// debug
+
+	// options
+	string compilerVersion = GetEnumOption("Compiler Version");
+	int bUnicode = GetBooleanOption("Unicode");
+	string compilerBinDir = GetDirectoryOption("Compiler Bin Directory");
+	string compilerIncludeDir = GetDirectoryOption("Compiler Include Directory");
+	string compilerLibraryDir = GetDirectoryOption("Compiler Library Directory");
+
+	// do some checks
+	if (compilerBinDir == "") {
+		Output("Error, please specify compiler bin directory in compiler options");
+		Exit();
+	}
+	if (compilerIncludeDir == "") {
+		Output("Error, please specify compiler include directory in compiler options");
+		Exit();
+	}
+	if (compilerLibraryDir == "") {
+		Output("Error, please specify compiler library directory in compiler options");
+		Exit();
+	}
+
+	SetVariable("PATH", compilerBinDir);
+
+	int nFlags;
+	string library = GetLibrary();
+	if (library == "yl.lib") {
+		nFlags = 0;
+	}
+	else if (library == "yld.lib") {
+		nFlags = FLAG_DEBUG;
+	}
+	else if (library == "ylr.lib") {
+		nFlags = FLAG_RTLDLL;
+	}
+	else if (library == "ylrd.lib") {
+		nFlags = FLAG_RTLDLL | FLAG_DEBUG;
+	}
+	else if (library == "ylri.dll") {
+		nFlags = FLAG_RTLDLL | FLAG_DLL;
+	}
+	else if (library == "ylrid.dll") {
+		nFlags = FLAG_RTLDLL | FLAG_DLL | FLAG_DEBUG;
+	}
+	else if (library == "ylmt.lib") {
+		nFlags = FLAG_MULTITHREADED;
+	}
+	else if (library == "ylmtd.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_DEBUG;
+	}
+	else if (library == "ylmtr.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL;
+	}
+	else if (library == "ylmtrd.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DEBUG;
+	}
+	else if (library == "ylmtri.dll") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL;
+	}
+	else if (library == "ylmtrid.dll") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL | FLAG_DEBUG;
+	}
+	else if (library == "ylvmt.lib") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED;
+	}
+	else if (library == "ylvmtd.lib") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED | FLAG_DEBUG;
+	}
+	else if (library == "ylvmtr.lib") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_VCL;
+	}
+	else if (library == "ylvmtrd.lib") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_VCL | FLAG_DEBUG;
+	}
+	else if (library == "ylvmtri.dll") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL | FLAG_VCL;
+	}
+	else if (library == "ylvmtrid.dll") {
+		nFlags = FLAG_VCL | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL | FLAG_VCL | FLAG_DEBUG;
+	}
+
+	int nSourceFileFlags = SFLF_C | SFLF_CPP | SFLF_MBCS;
+	if (bUnicode) {
+		nSourceFileFlags = nSourceFileFlags | SFLF_UNICODE;
+	}
+
+	string libraryDir = GetLibraryDir();
+	string libraryPathName = libraryDir + "\\" + library;
+
+	// create directory
+	Output("Creating directory...");
+	MakeDir(libraryDir);
+
+	if (nFlags & FLAG_DLL) {
+		// delete dll
+		Output("Deleting DLL...");
+		DeleteFile(libraryPathName);
+
+		// delete lib file
+		Output("Deleting import library...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".lib");
+
+		// delete tds file
+		Output("Deleting .TDS file...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".tds");
+	}
+	else {
+		// delete library
+		Output("Deleting library...");
+		DeleteFile(libraryPathName);
+	}
+
+	// compile files
+	Output("Compiling files...");
+	string command = "";
+	if (nFlags & FLAG_DLL) {
+		command = "-WD ";
+	}
+	if (nFlags & FLAG_DEBUG) {
+		command = command + "-Od -w -Ve -r- -k -y -v -vi- -c -b- -w-par -w-inl -Vx";
+	}
+	else {
+		command = command + "-O2 -w -Ve -k- -vi -c -b- -w-par -w-inl -Vx";
+	}
+	if (nFlags & FLAG_MULTITHREADED) {
+		command = command + " -tWM";
+	}
+	else {
+		command = command + " -tWM-";
+	}
+	if (nFlags & FLAG_RTLDLL) {
+		command = command + " -tWR";
+	}
+	command = command + "\n-I\"" + GetIncludeDir() + "\";\"" + compilerIncludeDir + "\"\n-D";
+	if (!(nFlags & FLAG_VCL)) {
+		command = command + "_NO_VCL;";
+	}
+	if (nFlags & FLAG_RTLDLL) {
+		command = command + "_RTLDLL;";
+	}
+	if (nFlags & FLAG_DEBUG) {
+		command = command + "YYDEBUG";
+	}
+	else {
+		command = command + "NDEBUG";
+	}
+	if (nFlags & FLAG_DLL) {
+		command = command + ";YYBUILDDLL";
+	}
+	if (!bUnicode) {
+		command = command + ";YYNUNICODE";
+	}
+	command = command + " -Tkh30000\n";
+
+	string commandFileName = GetSourceDir() + "\\" + "temp.cfg";
+	DeleteFile(commandFileName);
+	AppendFile(commandFileName, command);
+
+	int i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			int nExitCode;
+			int bSuccess = Execute("bcc32.exe +\"" + commandFileName + "\" \"" + fileName + "\"", nExitCode);
+			if (!bSuccess || nExitCode) {
+				Exit();
+			}
+		}
+		CloseSourceFileList(i);
+	}
+	DeleteFile(commandFileName);
+
+	if (nFlags & FLAG_DLL) {
+		// link
+		Output("Linking...");
+		command = "";
+		int i = OpenSourceFileList(nSourceFileFlags);
+		if (i != -1) {
+			string fileName;
+			while (GetSourceFile(i, fileName)) {
+				command = command + "\"" + GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj\" +\n";
+			}
+			CloseSourceFileList(i);
+		}
+
+		command = command + "-L" + GetShortPathName(compilerLibraryDir) + "\\obj;" +
+			GetShortPathName(compilerLibraryDir);
+		if (nFlags & FLAG_DEBUG) {
+			command = command + ";" + GetShortPathName(compilerLibraryDir) + "\\Debug +\n";
+		}
+		else {
+			command = command + ";" + GetShortPathName(compilerLibraryDir) + "\\Release +\n";
+		}
+		command = command + "-aa -Tpd -x -Gn -Gi";
+		if (nFlags & FLAG_DEBUG) {
+			command = command + " -v";
+		}
+		command = command + " c0d32.obj";
+		if (nFlags & FLAG_VCL) {
+			if (compilerVersion == "Version 6") {
+				command = command + " vcl.bpi rtl.bpi vclx.bpi bcbsmp.bpi dclocx.bpi Memmgr.Lib";
+			}
+			command = command + " sysinit.obj";
+		}
+		command = command + ", +\n" + GetShortPathName(libraryDir) + "\\" + library + ",, +\n";
+		if (nFlags & FLAG_VCL) {
+			if (compilerVersion == "Version 3") {
+				command = command + "vcl35.lib import32.lib cp32mti.lib vcle35.lib,,";
+			}
+			else if (compilerVersion == "Version 4") {
+				command = command + "vcl40.lib import32.lib cp32mti.lib vcle40.lib,,";
+			}
+			else {
+				command = command + "vcl.lib import32.lib cp32mti.lib vcle.lib,,";
+			}
+		}
+		else if (nFlags & FLAG_MULTITHREADED) {
+			command = command + "import32.lib cw32mti.lib,,";
+		}
+		else {
+			command = command + "import32.lib cw32i.lib,,";
+		}
+
+		string commandFileName = GetSourceDir() + "\\temp.rsp";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("ilink32.exe @" + GetShortPathName(commandFileName), nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+	}
+	else {
+		// create library
+		Output("Creating library...");
+		if (nFlags & FLAG_DEBUG) {
+			command = "/P64";
+		}
+		else {
+			command = "/P32";
+		}
+		int i = OpenSourceFileList(nSourceFileFlags);
+		if (i != -1) {
+			string fileName;
+			while (GetSourceFile(i, fileName)) {
+				command = command + " &\n+" + GetShortPathName(GetSourceDir()) + "\\" +
+					GetFileBaseName(GetShortPathName(fileName)) + ".obj";
+			}
+			CloseSourceFileList(i);
+		}
+
+		string commandFileName = GetSourceDir() + "\\temp.rsp";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("tlib.exe " + GetShortPathName(libraryDir) + "\\" + library +
+			" @" + GetShortPathName(commandFileName), nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+	}
+
+	// delete object files
+	Output("Deleting object files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj");
+		}
+		CloseSourceFileList(i);
+	}
+}

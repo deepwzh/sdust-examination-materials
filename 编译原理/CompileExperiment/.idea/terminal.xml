@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TerminalProjectOptionsProvider">
+    <envs>
+      <env key="bison_simple" value="D:\Compilation principle\CompileExperiment\UnxUtils\usr\local\share\bison.simple" />
+      <env key="bison_hairy" value="D:\Compilation principle\CompileExperiment\UnxUtils\usr\local\share\bison.hairy" />
+      <env key="PATH" value="D:\Compilation principle\CompileExperiment\UnxUtils\usr\local\share\;D:\Compilation principle\CompileExperiment\UnxUtils\usr\local\wbin;" />
+    </envs>
+  </component>
+</project>

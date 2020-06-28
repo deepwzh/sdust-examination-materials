@@ -1,0 +1,5 @@
+"D:\Software\Jetbrain\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Compilation principle\CompileExperiment"
+-- Configuring done
+WARNING: Target "Experiment2" requests linking to directory "C:/Program Files (x86)/Parser Generator 2/Cpp/Lib/msvc32/".  Targets may link only to libraries.  CMake is dropping the item.
+-- Generating done
+-- Build files have been written to: D:/Compilation principle/CompileExperiment/cmake-build-debug

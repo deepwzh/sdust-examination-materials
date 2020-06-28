@@ -1,0 +1,84 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Compilation principle/CompileExperiment/Experiment1/Parser.cpp
+cstdlib
+-
+cstring
+-
+Parser.h
+D:/Compilation principle/CompileExperiment/Experiment1/Parser.h
+word/BlankWord.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/BlankWord.h
+word/Identifier.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Identifier.h
+word/Operator.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Operator.h
+word/ReservedWord.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/ReservedWord.h
+word/Separator.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Separator.h
+word/UnsignedInteger.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/UnsignedInteger.h
+word/Double.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Double.h
+cstdio
+-
+cstdlib
+-
+
+D:/Compilation principle/CompileExperiment/Experiment1/Parser.h
+vector
+-
+word/Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/BlankWord.h
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/Double.h
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+Separator.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Separator.h
+BlankWord.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/BlankWord.h
+Operator.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Operator.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/Identifier.h
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+ReservedWord.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/ReservedWord.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/Operator.h
+vector
+-
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/ReservedWord.h
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+vector
+-
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/Separator.h
+vector
+-
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/UnsignedInteger.h
+Word.h
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+
+D:/Compilation principle/CompileExperiment/Experiment1/word/Word.h
+

@@ -1,0 +1,660 @@
+<html>
+
+<head>
+<meta name="description"
+content="Native Win32 ports of some GNU utilities
+linux
+bison-1.28 (GNU yacc)
+bzip2
+diffutils-2.7
+fileutils-3.16
+findutils-4.1
+flex-2.5.4 (GNU lex)
+gawk-3.0.5 (GNU awk)
+grep-2.4
+gsar110
+gzip-1.2.4
+less-340
+m4-1.4
+make-3.78.1
+patch-2.4
+sed-2.05
+shellutils-1.9.4
+tar-1.12
+textutils-1.22
+wget-1.6.0
+fsplit
+recode-3.5
+ncompress-2.4.2
+zsh">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<meta name="keywords" content="Win32,GNU,Unix,Linux,utilities">
+<title>Native Win32 ports of some GNU utilities</title>
+</head>
+
+<body bgcolor="#E2E2EB">
+
+<table border="0" width="72%">
+  <tr>
+    <td width="100%"><table border="0" width="100%" bgcolor="#8080FF">
+      <tr>
+        <td width="32%"></td>
+        <td width="68%"><big><big><font face="Verdana">GNU utilities for Win32</font></big></big></td>
+      </tr>
+    </table>
+    <p align="left"><font face="Verdana"><br>
+    This are some ports of common <a href="http://www.fsf.org">GNU</a> utilities to native
+    Win32. In this context, native means the executables do only depend on the Microsoft
+    C-runtime (msvcrt.dll) and not an emulation layer like that provided by <a
+    href="http://www.cygwin.com/">Cygwin</a> tools.<br>
+    </font></p>
+    <p align="left"><strong><font face="Verdana">Download:</font></strong></p>
+    <blockquote>
+      <p align="left"><font face="Verdana">by http: <a href="UnxUtils.zip">UnxUtils.zip</a><br>
+      latest updates (after 14-04-03):&nbsp; <a href="UnxUpdates.zip">UnxUpdates.zip</a> </font></p>
+    </blockquote>
+    <p><strong><font face="Verdana">Source code:</font></strong></p>
+    <blockquote>
+      <p align="left"><font face="Verdana">I have started an Open source project at <a
+      href="http://unxutils.sourceforge.net">http://unxutils.sourceforge.net</a>. There is a
+      &nbsp; <a href="#cvs">CVS</a> repository of all sources, even if the changes to the
+      original GNU code are trivial. The repository can be accessed via anonymous CVS with the
+      command<br>
+      </font><small><font face="Courier New">cvs
+      -d:pserver:anonymous@cvs.UnxUtils.sourceforge.net:/cvsroot/unxutils login</font></small></p>
+    </blockquote>
+    <hr>
+    <p align="left"><small><font face="Verdana">The following program versions are covered:</font></small></p>
+    <blockquote>
+      <p align="left"><font face="Verdana"><small>bc-1.05<br>
+      bison-1.28<br>
+      bzip2-1.0.2<br>
+      diffutils-2.7<br>
+      fileutils-3.16<br>
+      findutils-4.1<br>
+      flex-2.5.4<br>
+      gawk-3.1.0<br>
+      grep-2.4.2<br>
+      gsar110<br>
+      gzip-1.2.4<br>
+      indent-2.2.9<br>
+      jwhois-2.4.1<br>
+      less-340<br>
+      m4-1.4<br>
+      make-3.78.1<br>
+      patch-2.5<br>
+      recode-3.6<br>
+      rman-3.0.7<br>
+      sed-3.02<br>
+      shellutils-1.9.4<br>
+      tar-1.12<br>
+      textutils-2.1</small><br>
+      <small>unrar-3.00<br>
+      wget-1.8.2<br>
+      which-2.4</small></font></p>
+    </blockquote>
+    <p align="left"><small><font face="Verdana">Standard behavior:</font></small></p>
+    <ul>
+      <li><p align="left"><small><font face="Verdana">forward as well as backward slashes in file
+        paths are accepted.</font></small></p>
+      </li>
+    </ul>
+    <p align="left"><font face="Verdana">What is new:</font></p>
+    <p align="left"><font face="Verdana"><br>
+    <small>&nbsp;&nbsp; <u>14-04-03</u></small></font></p>
+    <ul>
+      <li><p align="left"><strong><font face="Verdana" color="#E41B66">New edition</font></strong></p>
+      </li>
+      <li><p align="left"><small><font face="Verdana">The programs are in use on all continents of
+        earth, including Antarctica. Still no users on Mars.</font></small></p>
+      </li>
+    </ul>
+    <p align="left">&nbsp;</p>
+    <table border="1" width="698" height="2400">
+      <tr>
+        <td width="1" height="26" bgcolor="#8080FF"><h2 align="center">Program</h2>
+        </td>
+        <td width="733" height="26" bgcolor="#8080FF"><h2 align="center">Notes</h2>
+        </td>
+      </tr>
+      <tr>
+        <td width="1" height="19">agrep.exe</td>
+        <td width="733" height="19">got it from here: <a href="http://www.tgries.de/agrep/">http://www.tgries.de/agrep/</a></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">ansi2knr.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">basename.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">bison.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">bzip2.exe</td>
+        <td width="733" height="19">Julian Sewards <a href="http://sourceware.cygnus.com/bzip2/">alternative
+        compressor</a></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">bunzip2.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">bzip2recover.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">cat.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">chgrp.exe</td>
+        <td width="733" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="1" height="19">chmod.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">chown.exe</td>
+        <td width="733" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="1" height="19">cksum.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">cmp.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">comm.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">compress.exe</td>
+        <td width="733" height="19">for (de)compressing .Z files; this is actually a program
+        called ncompress and was found on one of&nbsp; the <a
+        href="ftp://sunsite.unc.edu/pub/Linux/">Linux mirrors</a></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">cp.exe</td>
+        <td width="733" height="19">works only on NT, does real hardlinks on NTFS</td>
+      </tr>
+      <tr>
+        <td width="1" height="19">csplit.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">cut.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">date.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">dd.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">df.exe</td>
+        <td width="733" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="1" height="19">diff.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">diff3.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="1" height="19">dirname.exe</td>
+        <td width="733" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">du.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">echo.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">egrep.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">env.exe</td>
+        <td width="476" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">expand.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">expr.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">factor.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">fgrep.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="38">find.exe</td>
+        <td width="476" height="38"><ul>
+          <li>Example of command line under Cmd/Command shell:<br>
+            find -name *.txt -exec cat {} ;</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td width="216" height="19">flex.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">fmt.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">fold.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gawk.exe</td>
+        <td width="476" height="19">input files are opened in text mode</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">make.exe</td>
+        <td width="476" height="19">From v3.77 upwards, make searches for a sh.exe on the path. If
+        it does not find one, it switches to win32 make mode that is it uses intermediate batch
+        files for command processing.<br>
+        This is fine until your makefile tries to execute something like mkdir, which will invoke
+        the internal mkdir from cmd.exe or command.com. As the results may not be to your liking,
+        you may prefer to use the sh.exe provide here.</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">grep.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gsar.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gunzip.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gzip.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">head.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">id.exe</td>
+        <td width="476" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">install.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">join.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">less.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="7">ln.exe</td>
+        <td width="476" height="7">works only on NT, does real hardlinks on NTFS</td>
+      </tr>
+      <tr>
+        <td width="216" height="6">logname.exe</td>
+        <td width="476" height="6"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">ls.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">m4.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">md5sum.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">mkdir.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">mkfifo.exe</td>
+        <td width="476" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">mknod.exe</td>
+        <td width="476" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">mv.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">mvdir.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">nl.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">od.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">paste.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">patch.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">pathchk.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">pr.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">printenv.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">printf.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">ptx.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">recode.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">rm.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">rman.exe</td>
+        <td width="476" height="19">PolyglotMan by Thomas A. Phelps ( <a
+        href="ftp://ftp.cs.berkeley.edu/ucb/people/phelps/tcltk/rman.tar.Z">source</a>)</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">rmdir.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sdiff.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sed.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">seq.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sleep.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sort.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sh.exe</td>
+        <td width="476" height="19">renamed zsh - this is no replacement for the Cygwin bash</td>
+      </tr>
+      <tr>
+        <td width="216" height="17">shar.exe</td>
+        <td width="476" height="17">only works with -T (text) option</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">split.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">stego.exe</td>
+        <td width="476" height="19"><em>stego -E encode.me -T words.txt<br>
+        </em>Encodes file encode.me as gibberish text using words from the words.txt file to
+        stdout. If the -T option is omitted, stego looks for a file called &quot;words&quot; in
+        the current directory. Of course, the -D option will decode the input file; remember to
+        redistribute words.txt together with the encoded file.<br>
+        The purpose of this program is to disguise binary files as a kind of text file or to drive
+        your coworkers mad.</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">su.exe</td>
+        <td width="476" height="19">dummy</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sum.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">sync.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">tac.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">tail.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="76">tar.exe</td>
+        <td width="476" height="76"><ul>
+          <li>only forward slashes are accepted</li>
+          <li>the -z option (compression) does not work</li>
+          <li>no remote archives</li>
+          <li>works only on NT, does real hardlinks on NTFS</li>
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td width="216" height="19">tee.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">test.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">touch.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">tr.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">uname.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">unexpand.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">uniq.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">unrar.exe</td>
+        <td width="476" height="19">This is unrar 3.00 beta 7, which seems to have been
+        &quot;free&quot;. Works good enough.</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">unshar.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">uudecode.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">uuencode.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">wc.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">wget.exe</td>
+        <td width="476" height="19">wget 1.8.2 builds out of the box with MS Visual C</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">which.exe</td>
+        <td width="476" height="19">does not search the current directory</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">whoami.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">xargs.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">yes.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">zcat.exe</td>
+        <td width="476" height="19"></td>
+      </tr>
+      <tr>
+        <td width="692" height="19" colspan="2" bgcolor="#FF0000"></td>
+      </tr>
+      <tr>
+        <td width="692" height="19" colspan="2"><p align="center"><strong><font face="Verdana">Additional
+        programs</font></strong></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">pclip.exe</td>
+        <td width="476" height="19">put the Windows clipboard text to stdout</td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gclip.exe</td>
+        <td width="476" height="19">get&nbsp; the Windows clipboard text from stdin<br>
+        Example: run the text from the clipboard through sed and put the result back<br>
+        <em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        pclip | sed &quot;s/string1/string2/g&quot; | gclip</em></td>
+      </tr>
+      <tr>
+        <td width="216" height="19">gplay.exe</td>
+        <td width="476" height="19">My minimalist console multimedia player using <a
+        href="http://msdn.microsoft.com/directx">DirectShow</a>. With<br>
+        <em>gplay filename | URL</em><br>
+        you should be able to play just everything, as long as Microsoft supports it.</td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+<h3><small><font face="Trebuchet MS"><a href="md5sum">md5 sums</a> </font></small></h3>
+
+<hr>
+
+<h3><small><font face="Trebuchet MS">Links:</font></small></h3>
+
+<p><font face="Trebuchet MS"><small><strong>The gcc compiler for Win32:</strong><br>
+&nbsp;&nbsp; <a
+href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/egcs-mingw32.html">http://www.mingw.org</a></small><br>
+<strong><small>Digital Mars compiler:</small><br>
+</strong><small>&nbsp;&nbsp; <a href="http://www.digitalmars.com">http://www.digitalmars.com</a><br>
+<a name="zsh"></a><strong>A zsh shell for Win32:</strong><br>
+&nbsp;&nbsp; <a href="ftp://ftp.blarg.net/users/amol/zsh">ftp://ftp.blarg.net/users/amol/zsh</a><br>
+<strong>The home of vim, has a Win32 version:</strong></font><br>
+</small><font face="Trebuchet MS"><font size="2">&nbsp;&nbsp; <a
+href="&nbsp;&nbsp;%20http:/www.vim.org">http://www.vim.org</a></font><small><br>
+<strong>An emacs for NT:</strong></font><br>
+</small><font face="Trebuchet MS" size="2">&nbsp;&nbsp; <a
+href="http://www.gnu.org/software/emacs/windows/ntemacs.html">http://www.gnu.org/software/emacs/windows/ntemacs.html</a></font><small><br>
+<a name="cvs"></a><font face="Trebuchet MS"><strong>The CVS version control system:</strong></font><br>
+</small><font face="Trebuchet MS" size="2">&nbsp;&nbsp; <a href="http://www.cvshome.org">http://www.cvshome.org</a><br>
+&nbsp;&nbsp; <a href="http://www.cvshome.org">http://www.cvsnt.org</a></font><br>
+<small><font face="Trebuchet MS"><strong>A free IDE for the Win32 gcc:</strong></font><br>
+<font face="Verdana">&nbsp; <a href="http://www.objectcentral.com">VIDE</a></font></small></p>
+
+<p><small><font face="Trebuchet MS">José Fonsecas site with related stuff: <br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://jrfonseca.dyndns.org/projects/gnu-win32">http://jrfonseca.dyndns.org/projects/gnu-win32</a><br>
+HTML man pages for the GNU utilities: <br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.fsf.org/manual/manual.html">http://www.fsf.org/manual/manual.html</a><br>
+An Un*x shell scripting resource:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.shelldorado.com/">http://www.shelldorado.com/</a><br>
+Another source of unixish stuff: <br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://virtunix.itribe.net">http://virtunix.itribe.net</a></font></small></p>
+
+<p><font face="Trebuchet MS"><small>Useful free NT system utilities:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.sysinternals.com/">http://www.sysinternals.com</a></small><br>
+<small>Some hints on cloning your system with dd:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a
+href="http://www.rajeevnet.com/hacks_hints/os_clone/os_cloning.html">http://www.rajeevnet.com/hacks_hints/os_clone/os_cloning.html</a></small><br>
+<small>Programs missing from this distribution, especially a command line registry editor.</small><br>
+<small>&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.dmst.aueb.gr/dds/sw/outwit">http://www.dmst.aueb.gr/dds/sw/outwit</a></small><br>
+<br>
+<small>The GNU Privacy Guard<small>:</small><br>
+&nbsp;&nbsp;<font color="#FF0000">&nbsp;&nbsp; <a href="http://www.gnupg.org">http://www.gnupg.org</a></font></small><br>
+<small>zip and unzip from the Infozip distribution:</small><br>
+<small>&nbsp;&nbsp;<font color="#FF0000">&nbsp;&nbsp; <a
+href="http://www.info-zip.org/pub/infozip/">http://www.info-zip.org/pub/infozip</a></font></small></font></p>
+
+<p><small><font face="Trebuchet MS">An Un*x emulation on Win32:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.cygwin.com">http://www.cygwin.com</a><br>
+Another Un*x emulation on Win32:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.research.att.com/sw/tools/uwin/">http://www.research.att.com/sw/tools/uwin/</a><br>
+Windows Services for UNIX, integrates the Interix subsystem:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <a
+href="http://www.microsoft.com/windows/sfu/productinfo/overview/default.asp">http://www.microsoft.com/windows/sfu/productinfo/overview/default.asp</a></font></small></p>
+
+<hr>
+
+<p><!-- BEGIN WEBSIDESTORY CODE v1.2 - ALTERING THIS CODE WILL CAUSE TERMINATION OF ACCOUNT --><!-- COPYRIGHT 1996-1998 WEBSIDESTORY, INC. ALL RIGHT RESERVED --><script language="javascript"><!--dt=(new Date()).getHours();sv = 10;ss="na";sc="na";ln="";pl="";rf=escape(document.referrer)+"";if((rf=="undefined")||(rf=="")){rf="bookmark";};bn=navigator.appName;if(bn.substring(0,9)=="Microsoft"){bn="MSIE";};bv=Math.round(parseFloat(navigator.appVersion)*100);if((bn=="MSIE")&&(parseInt(bv)==2)){bv=301;}; ja="na";if(navigator.appName=="Netscape") { if(bv>400) ln=navigator.language;if(bv>300) for(var i=0;i<navigator.plugins.length;i++)pl +=navigator.plugins[i].name+":" };//--></script><script language="javascript1.1"><!--sv=11;ja=(navigator.javaEnabled()==true)?"y":"n";//--></script><script
+language="javascript1.2"><!--sv=12;ss=screen.width+"*"+screen.height;sc=(bn=="MSIE")?screen.colorDepth:screen.pixelDepth;if(sc=="undefined"){sc="na";};//--></script><script language="javascript1.3"><!--sv=13;//--></script><script
+language="javascript"><!--arg="&bn="+bn+"&bv="+bv+"&ss="+ss+"&sc="+sc+"&dt="+dt+"&sv="+sv;arg+="&ja="+ja+"&rf="+rf+"&ln="+ln+"&pl="+escape(pl);x1="<a href='http://www.hitbox.com'>";x2="<img src='http://w122.hitbox.com/Hitbox?hb=W28907065181";x3="&cd=1&bt=1' border='0' height='60' width='234'";x4="alt='CLICK HERE TO VISIT THE HITBOX.COM'></a>";document.write(x1+x2+arg+x3+x4);//--></script><script language="javascript1.2"><!--document.write("<");document.write("!--");//--></script><font
+face="Trebuchet MS">Read my standard disclaimer: <a href="../StdDisclaimer.html">(really?)</a><br>
+Last change on 15-04-03 by <a href="mailto:syring@web.de">Karl M. Syring</a> (bug reports
+are welcome)<br>
+Original location of this page: <a
+href="http://www.weihenstephan.de/~syring/win32/UnxUtils.html">http://www.weihenstephan.de/~syring/win32/UnxUtils.html</a></font></p>
+<!-- BEGIN WEBSIDESTORY CODE V5. COPYRIGHT 1998-2000 WEBSIDESTORY, INC. ALL RIGHTS RESERVED. U.S. PATENT PENDING. -->
+<!-- webbot bot="HTMLMarkup" startspan -->
+<!-- webbot bot="HTMLMarkup" endspan -->
+<!-- END WEBSIDESTORY CODE  -->
+<!-- End Mind It Box -->
+</body>
+</html>
