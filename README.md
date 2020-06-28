@@ -39,14 +39,17 @@ TODO:
 
 ### 2. 申请成为维护者
 有充足时间精力而又富有热情的同学可以申请成为维护者，我们会根据实际情况决定是否录用。
-### 3.贡献者列表（按首字母排序）
+### 3.贡献者列表（排名不分先后）
 
 - [deepwzh](https://github.com/deepwzh)
 - [LANVNAL](https://github.com/LANVNAL)
 - [lutherlau](https://github.com/lutherlau)
 - [renhongjie](https://github.com/renhongjie)
 - [Fazx](https://github.com/Fazx)
-
+- [Chanje](https://github.com/ChanjeChieh)
+- [ZhiHong_Xu](https://github.com/LearnerHong)
+- [NzzzzN](https://github.com/NzzzzN)
+- [yaoyaoq](https://github.com/yaoyaoq)
 ## 5. 许可与版权
 [CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
 
