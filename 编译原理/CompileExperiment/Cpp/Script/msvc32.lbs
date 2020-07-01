@@ -1,0 +1,379 @@
+// visual c++ (32-bit) libbuilder script file
+
+if (IsOption()) {
+	// name
+	SetName("Visual C++ (32-bit)");
+
+	// directory
+	SetDirectory("msvc32");
+
+	// libraries
+	AddLibrary("yl.lib", 1);
+	AddLibrary("yld.lib", 1);
+	AddLibrary("ylmt.lib", 1);
+	AddLibrary("ylmtd.lib", 1);
+	AddLibrary("ylmtr.lib", 1);
+	AddLibrary("ylmtrd.lib", 1);
+	AddLibrary("ylmtri.dll", 1);
+	AddLibrary("ylmtrid.dll", 1);
+
+	// options
+	AddEnumOption("Compiler Version", "Compiler Version");
+	AddEnumItem("Compiler Version", "Version 4", "Version 4");
+	AddEnumItem("Compiler Version", "Version 5", "Version 5");
+	AddEnumItem("Compiler Version", "Version 6", "Version 6");
+	AddEnumItem("Compiler Version", "Version 7 (.NET)", "Version 7");
+	SetEnumOption("Compiler Version", "Version 6");
+	AddBooleanOption("Unicode", 1, "Unicode");
+	AddBooleanOption("Treat wchar_t as Built-in Type", 0, "wchar_t");
+	AddDirectoryOption("Compiler Bin Directory", "", "CompilerBinDir");
+	AddDirectoryOption("Compiler Bin Directory (2)", "", "CompilerBinDirectory2");
+	AddDirectoryOption("Compiler Include Directory", "", "CompilerIncludeDirectory");
+	AddDirectoryOption("Compiler Include Directory (2)", "", "CompilerIncludeDirectory2");
+	AddDirectoryOption("Compiler Library Directory", "", "CompilerLibraryDirectory");
+	AddDirectoryOption("Compiler Library Directory (2)", "", "CompilerLibraryDirectory2");
+}
+else {
+	// flags
+	int FLAG_MULTITHREADED = 0x01;		// multithreaded
+	int FLAG_RTLDLL = 0x02;				// rtl dll
+	int FLAG_DLL = 0x04;				// dll
+	int FLAG_DEBUG = 0x08;				// debug
+
+	// options
+	string compilerVersion = GetEnumOption("Compiler Version");
+	int bUnicode = GetBooleanOption("Unicode");
+	int bWchar_t = GetBooleanOption("Treat wchar_t as Built-in Type");
+	string compilerBinDir = GetDirectoryOption("Compiler Bin Directory");
+	string compilerBinDir2 = GetDirectoryOption("Compiler Bin Directory (2)");
+	string compilerIncludeDir = GetDirectoryOption("Compiler Include Directory");
+	string compilerIncludeDir2 = GetDirectoryOption("Compiler Include Directory (2)");
+	string compilerLibraryDir = GetDirectoryOption("Compiler Library Directory");
+	string compilerLibraryDir2 = GetDirectoryOption("Compiler Library Directory (2)");
+
+	// do some checks
+	if (compilerBinDir == "") {
+		Output("Error, please specify compiler bin directory in compiler options");
+		Exit();
+	}
+	if (compilerBinDir2 == "") {
+		if (compilerVersion != "Version 4") {
+			Output("Error, please specify compiler bin directory (2) in compiler options");
+			Exit();
+		}
+	}
+	if (compilerIncludeDir == "") {
+		Output("Error, please specify compiler include directory in compiler options");
+		Exit();
+	}
+	if (compilerIncludeDir2 == "") {
+		if (compilerVersion == "Version 7 (.NET)") {
+			Output("Error, please specify compiler include directory (2) in compiler options");
+			Exit();
+		}
+	}
+	if (compilerLibraryDir == "") {
+		Output("Error, please specify compiler library directory in compiler options");
+		Exit();
+	}
+	if (compilerLibraryDir2 == "") {
+		if (compilerVersion == "Version 7 (.NET)") {
+			Output("Error, please specify compiler library directory (2) in compiler options");
+			Exit();
+		}
+	}
+
+	string path = compilerBinDir;
+	if (compilerBinDir2 != "") {
+		path = path + ";" + compilerBinDir2;
+	}
+	SetVariable("PATH", path);
+
+	int nFlags;
+	string library = GetLibrary();
+	if (library == "yl.lib") {
+		nFlags = 0;
+	}
+	else if (library == "yld.lib") {
+		nFlags = FLAG_DEBUG;
+	}
+	else if (library == "ylmt.lib") {
+		nFlags = FLAG_MULTITHREADED;
+	}
+	else if (library == "ylmtd.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_DEBUG;
+	}
+	else if (library == "ylmtr.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL;
+	}
+	else if (library == "ylmtrd.lib") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DEBUG;
+	}
+	else if (library == "ylmtri.dll") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL;
+	}
+	else if (library == "ylmtrid.dll") {
+		nFlags = FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL | FLAG_DEBUG;
+	}
+
+	int nSourceFileFlags = SFLF_C | SFLF_CPP | SFLF_MBCS;
+	if (bUnicode) {
+		nSourceFileFlags = nSourceFileFlags | SFLF_UNICODE;
+	}
+
+	string libraryDir = GetLibraryDir();
+	string libraryPathName = libraryDir + "\\" + library;
+
+	// create directory
+	Output("Creating directory...");
+	MakeDir(libraryDir);
+
+	if (nFlags & FLAG_DLL) {
+		// delete dll
+		Output("Deleting DLL...");
+		DeleteFile(libraryPathName);
+
+		// delete import library
+		Output("Deleting import library...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".lib");
+
+		// delete export file
+		Output("Deleting export file...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".exp");
+	}
+	else {
+		// delete library
+		Output("Deleting library...");
+		DeleteFile(libraryPathName);
+
+		if (compilerVersion == "Version 4") {
+			// delete duplicate library
+			Output("Deleting duplicate library...");
+			DeleteFile(GetSourceDir() + "\\" + library);
+		}
+	}
+
+	if (nFlags & FLAG_DEBUG) {
+		if (compilerVersion != "Version 4" || (nFlags & FLAG_DLL)) {
+			// delete program database file
+			Output("Deleting program database file...");
+			DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".pdb");
+		}
+	}
+
+	if (compilerVersion != "Version 4") {
+		// delete incremental database file
+		Output("Deleting incremental database file...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".idb");
+	}
+
+	// compiling files
+	Output("Compiling files...");
+	string command = "/nologo";
+	if (nFlags & FLAG_MULTITHREADED) {
+		if (nFlags & FLAG_RTLDLL) {
+			if (nFlags & FLAG_DEBUG) {
+				command = command + " /MDd";
+			}
+			else {
+				command = command + " /MD";
+			}
+		}
+		else {
+			if (nFlags & FLAG_DEBUG) {
+				command = command + " /MTd";
+			}
+			else {
+				command = command + " /MT";
+			}
+		}
+	}
+	else {
+		if (nFlags & FLAG_DEBUG) {
+			command = command + " /MLd";
+		}
+		else {
+			command = command + " /ML";
+		}
+	}
+	if (compilerVersion == "Version 7 (.NET)" && bWchar_t) {
+		command = command + " /Zc:wchar_t";
+	}
+	command = command + " /W3 /GX";
+	if (nFlags & FLAG_DEBUG) {
+		if (compilerVersion != "Version 4" || (nFlags & FLAG_DLL)) {
+			command = command + " /Zi";
+		}
+		else {
+			command = command + " /Z7";
+		}
+	}
+	if (nFlags & FLAG_DEBUG) {
+		command = command + " /Od /D \"WIN32\" /D \"_DEBUG\" /D \"_WINDOWS\" /D \"_MBCS\" /D \"YYDEBUG\"";
+	}
+	else {
+		command = command + " /O2 /D \"WIN32\" /D \"NDEBUG\" /D \"_WINDOWS\" /D \"_MBCS\"";
+	}
+	if (nFlags & FLAG_DLL) {
+		command = command + " /D \"YYBUILDDLL\"";
+	}
+	if (!bUnicode) {
+		command = command + " /D \"YYNUNICODE\"";
+	}
+	command = command + "\n/Fd\"" + libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".pdb\"\n";
+	if (compilerVersion != "Version 4") {
+		command = command + "/FD";
+		if (nFlags & FLAG_DEBUG) {
+			command = command + " /GZ";
+		}
+	}
+	command = command + " /c\n/I \"" + GetIncludeDir() + "\"\n/I \"" + compilerIncludeDir + "\"\n";
+	if (compilerIncludeDir2 != "") {
+		command = command + "/I \"" + compilerIncludeDir2 + "\"\n";
+	}
+
+	int i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string commandFileName = GetSourceDir() + "\\" + "temp.cmd";
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(commandFileName);
+			AppendFile(commandFileName, command);
+			if (compilerVersion != "Version 4") {
+				AppendFile(commandFileName, "\"" + fileName + "\"\n");
+				int nExitCode;
+				int bSuccess = Execute("cl.exe @\"" + commandFileName + "\"", nExitCode);
+				if (!bSuccess || nExitCode) {
+					Exit();
+				}
+			}
+			else {
+				AppendFile(commandFileName, "\"" + GetFileName(fileName) + "\"\n");
+				int nExitCode;
+				int bSuccess = Execute("cl.exe @\"" + GetFileName(commandFileName) + "\"", nExitCode);
+				if (!bSuccess || nExitCode) {
+					Exit();
+				}
+			}
+			DeleteFile(commandFileName);
+		}
+		CloseSourceFileList(i);
+	}
+
+	if (nFlags & FLAG_DLL) {
+		// link
+		Output("Linking...");
+		string command = "";
+		if (compilerVersion != "Version 4") {
+			command = "/libpath:\"" + compilerLibraryDir + "\"\n";
+			if (compilerLibraryDir2 != "") {
+				command = command + "/libpath:\"" + compilerLibraryDir2 + "\"\n";
+			}
+		}
+		command = command + "kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no ";
+		if (nFlags & FLAG_DEBUG) {
+			command = command + " /debug";
+		}
+		command = command + " /machine:I386\n/out:\"" + libraryPathName + "\"\n/implib:\"" +
+			libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".lib\"\n";
+
+		int i = OpenSourceFileList(nSourceFileFlags);
+		if (i != -1) {
+			string fileName;
+			while (GetSourceFile(i, fileName)) {
+				command = command + "\"" + GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj\"\n";
+			}
+			CloseSourceFileList(i);
+		}
+
+		if (compilerVersion == "Version 4") {
+			SetVariable("LIB", "\"" + compilerLibraryDir + "\"");
+		}
+
+		string commandFileName = GetSourceDir() + "temp.lcf";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("link.exe @\"" + commandFileName + "\"", nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+	}
+	else {
+		if (compilerVersion != "Version 4") {
+			// create library
+			Output("Creating library...");
+			string command = "/nologo\n/OUT:\"" + libraryPathName + "\"\n";
+			int i = OpenSourceFileList(nSourceFileFlags);
+			if (i != -1) {
+				string fileName;
+				while (GetSourceFile(i, fileName)) {
+					command = command + "\"" + GetSourceDir() + "\\" +
+						GetFileBaseName(fileName) + ".obj\"\n";
+				}
+				CloseSourceFileList(i);
+			}
+
+			string commandFileName = GetSourceDir() + "\\temp.cmd";
+			DeleteFile(commandFileName);
+			AppendFile(commandFileName, command);
+			int nExitCode;
+			int bSuccess = Execute("lib.exe @\"" + commandFileName + "\"", nExitCode);
+			if (!bSuccess || nExitCode) {
+				Exit();
+			}
+			DeleteFile(commandFileName);
+		}
+		else {
+			// create library
+			Output("Creating library...");
+			string command = "/nologo\n/OUT:" + library + "\n";
+			int i = OpenSourceFileList(nSourceFileFlags);
+			if (i != -1) {
+				string fileName;
+				if (GetSourceFile(i, fileName)) {
+					while (GetSourceFile(i, fileName)) {
+						command = command + GetFileBaseName(GetShortPathName(fileName)) + ".obj\n";
+					}
+				}
+				CloseSourceFileList(i);
+			}
+
+			string commandFileName = GetSourceDir() + "\\temp.cmd";
+			DeleteFile(commandFileName);
+			AppendFile(commandFileName, command);
+			int nExitCode;
+			int bSuccess = Execute("lib.exe @" + GetShortPathName(commandFileName), nExitCode);
+			if (!bSuccess || nExitCode) {
+				Exit();
+			}
+			DeleteFile(commandFileName);
+
+			// copy library
+			Output("Copying library...");
+			CopyFile(GetSourceDir() + "\\" + library, libraryPathName);
+
+			// delete duplicate library
+			Output("Deleting duplicate library...");
+			DeleteFile(GetSourceDir() + "\\" + library);
+		}
+	}
+
+	// delete object files
+	Output("Deleting object files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj");
+		}
+		CloseSourceFileList(i);
+	}
+
+	if (compilerVersion != "Version 4") {
+		// delete incremental database file
+		Output("Deleting incremental database file...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".idb");
+	}
+}

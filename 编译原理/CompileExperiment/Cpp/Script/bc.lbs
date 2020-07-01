@@ -1,0 +1,391 @@
+// borland c++
+
+if (IsOption()) {
+	// name
+	SetName("Borland C++");
+
+	// directory
+	SetDirectory("bc");
+
+	// libraries
+	// windows 3.x
+	AddLibrary("ylws.lib", 1);
+	AddLibrary("ylwsd.lib", 1);
+	AddLibrary("ylwm.lib", 1);
+	AddLibrary("ylwmd.lib", 1);
+	AddLibrary("ylwc.lib", 1);
+	AddLibrary("ylwcd.lib", 1);
+	AddLibrary("ylwl.lib", 1);
+	AddLibrary("ylwld.lib", 1);
+	// win32
+	AddLibrary("yl32.lib", 1);
+	AddLibrary("yl32d.lib", 1);
+	AddLibrary("yl32r.lib", 1);
+	AddLibrary("yl32rd.lib", 1);
+	AddLibrary("yl32m.lib", 1);
+	AddLibrary("yl32md.lib", 1);
+	AddLibrary("yl32mr.lib", 1);
+	AddLibrary("yl32mrd.lib", 1);
+	AddLibrary("yl32mri.dll", 1);
+	AddLibrary("yl32mrid.dll", 1);
+	// dos
+	AddLibrary("ylt.lib", 1);
+	AddLibrary("yltd.lib", 1);
+	AddLibrary("yls.lib", 1);
+	AddLibrary("ylsd.lib", 1);
+	AddLibrary("ylm.lib", 1);
+	AddLibrary("ylmd.lib", 1);
+	AddLibrary("ylc.lib", 1);
+	AddLibrary("ylcd.lib", 1);
+	AddLibrary("yll.lib", 1);
+	AddLibrary("ylld.lib", 1);
+	AddLibrary("ylh.lib", 1);
+	AddLibrary("ylhd.lib", 1);
+
+	// options
+	AddDirectoryOption("Compiler Bin Directory", "", "CompilerBinDirectory");
+	AddDirectoryOption("Compiler Include Directory", "", "CompilerIncludeDirectory");
+	AddDirectoryOption("Compiler Library Directory", "", "CompilerLibraryDirectory");
+}
+else {
+	// flags
+	int FLAG_WINDOWS3X		= 0x0001;		// windows 3.x
+	int FLAG_WIN32			= 0x0002;		// win32
+	int FLAG_DOS			= 0x0004;		// dos
+	int FLAG_MULTITHREADED	= 0x0008;		// multithreaded
+	int FLAG_RTLDLL			= 0x0010;		// rtl dll
+	int FLAG_DLL			= 0x0020;		// dll
+	int FLAG_TINY			= 0x0040;		// tiny
+	int FLAG_SMALL			= 0x0080;		// small
+	int FLAG_MEDIUM			= 0x0100;		// medium
+	int FLAG_COMPACT		= 0x0200;		// compact
+	int FLAG_LARGE			= 0x0400;		// large
+	int FLAG_HUGE			= 0x0800;		// huge
+	int FLAG_DEBUG			= 0x1000;		// debug
+
+	// option
+	string compilerBinDir = GetDirectoryOption("Compiler Bin Directory");
+	string compilerIncludeDir = GetDirectoryOption("Compiler Include Directory");
+	string compilerLibraryDir = GetDirectoryOption("Compiler Library Directory");
+
+	// do some checks
+	if (compilerBinDir == "") {
+		Output("Error, please specify compiler bin directory in compiler options");
+		Exit();
+	}
+	if (compilerIncludeDir == "") {
+		Output("Error, please specify compiler include directory in compiler options");
+		Exit();
+	}
+
+	SetVariable("PATH", compilerBinDir);
+
+	int nFlags;
+	string library = GetLibrary();
+	// windows 3.x
+	if (library == "ylws.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_SMALL;
+	}
+	else if (library == "ylwsd.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_SMALL | FLAG_DEBUG;
+	}
+	else if (library == "ylwm.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_MEDIUM;
+	}
+	else if (library == "ylwmd.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_MEDIUM | FLAG_DEBUG;
+	}
+	else if (library == "ylwc.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_COMPACT;
+	}
+	else if (library == "ylwcd.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_COMPACT | FLAG_DEBUG;
+	}
+	else if (library == "ylwl.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_LARGE;
+	}
+	else if (library == "ylwld.lib") {
+		nFlags = FLAG_WINDOWS3X | FLAG_LARGE | FLAG_DEBUG;
+	}
+	// win32
+	else if (library == "yl32.lib") {
+		nFlags = FLAG_WIN32;
+	}
+	else if (library == "yl32d.lib") {
+		nFlags = FLAG_WIN32 | FLAG_DEBUG;
+	}
+	else if (library == "yl32r.lib") {
+		nFlags = FLAG_WIN32 | FLAG_RTLDLL;
+	}
+	else if (library == "yl32rd.lib") {
+		nFlags = FLAG_WIN32 | FLAG_RTLDLL | FLAG_DEBUG;
+	}
+	else if (library == "yl32m.lib") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED;
+	}
+	else if (library == "yl32md.lib") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED | FLAG_DEBUG;
+	}
+	else if (library == "yl32mr.lib") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED | FLAG_RTLDLL;
+	}
+	else if (library == "yl32mrd.lib") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DEBUG;
+	}
+	else if (library == "yl32mri.dll") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL;
+	}
+	else if (library == "yl32mrid.dll") {
+		nFlags = FLAG_WIN32 | FLAG_MULTITHREADED | FLAG_RTLDLL | FLAG_DLL | FLAG_DEBUG;
+	}
+	// dos
+	else if (library == "ylt.lib") {
+		nFlags = FLAG_DOS | FLAG_TINY;
+	}
+	else if (library == "yltd.lib") {
+		nFlags = FLAG_DOS | FLAG_TINY | FLAG_DEBUG;
+	}
+	else if (library == "yls.lib") {
+		nFlags = FLAG_DOS | FLAG_SMALL;
+	}
+	else if (library == "ylsd.lib") {
+		nFlags = FLAG_DOS | FLAG_SMALL | FLAG_DEBUG;
+	}
+	else if (library == "ylm.lib") {
+		nFlags = FLAG_DOS | FLAG_MEDIUM;
+	}
+	else if (library == "ylmd.lib") {
+		nFlags = FLAG_DOS | FLAG_MEDIUM | FLAG_DEBUG;
+	}
+	else if (library == "ylc.lib") {
+		nFlags = FLAG_DOS | FLAG_COMPACT;
+	}
+	else if (library == "ylcd.lib") {
+		nFlags = FLAG_DOS | FLAG_COMPACT | FLAG_DEBUG;
+	}
+	else if (library == "yll.lib") {
+		nFlags = FLAG_DOS | FLAG_LARGE;
+	}
+	else if (library == "ylld.lib") {
+		nFlags = FLAG_DOS | FLAG_LARGE | FLAG_DEBUG;
+	}
+	else if (library == "ylh.lib") {
+		nFlags = FLAG_DOS | FLAG_HUGE;
+	}
+	else if (library == "ylhd.lib") {
+		nFlags = FLAG_DOS | FLAG_HUGE | FLAG_DEBUG;
+	}
+
+	int nSourceFileFlags = SFLF_C | SFLF_CPP | SFLF_MBCS;
+
+	string libraryDir = GetLibraryDir();
+	string libraryPathName = libraryDir + "\\" + library;
+
+	// create directory
+	Output("Creating directory...");
+	MakeDir(libraryDir);
+
+	if (nFlags & FLAG_DLL) {
+		// delete dll
+		Output("Deleting DLL...");
+		DeleteFile(libraryPathName);
+
+		// delete lib file
+		Output("Deleting import library...");
+		DeleteFile(libraryDir + "\\" + GetFileBaseName(libraryPathName) + ".lib");
+	}
+	else {
+		// delete library
+		Output("Deleting library...");
+		DeleteFile(libraryPathName);
+	}
+
+	// compile files
+	Output("Compiling files...");
+	string command;
+	if (!(nFlags & FLAG_WIN32)) {
+		if (nFlags & FLAG_DEBUG) {
+			command = "-c -v -vi- -R";
+		}
+		else {
+			command = "-c -O-d -O -Ob -Oe -Os -Ol -Oc -k- -Z";
+		}
+		if (nFlags & FLAG_TINY) {
+			command = command + " -mt";
+		}
+		if (nFlags & FLAG_SMALL) {
+			command = command + " -ms";
+		}
+		if (nFlags & FLAG_MEDIUM) {
+			command = command + " -mm";
+		}
+		if (nFlags & FLAG_COMPACT) {
+			command = command + " -mc";
+		}
+		if (nFlags & FLAG_LARGE) {
+			command = command + " -ml";
+		}
+		if (nFlags & FLAG_HUGE) {
+			command = command + " -mh";
+		}
+		if (nFlags & FLAG_WINDOWS3X) {
+			command = command + " -WS";
+		}
+		if (nFlags & FLAG_DOS) {
+			command = command + " -f";
+		}
+		command = command + "\n-I" + GetShortPathName(GetIncludeDir()) + ";" +
+			GetShortPathName(compilerIncludeDir) + "\n";
+		if (nFlags & FLAG_DEBUG) {
+			command = command + "-DYYDEBUG";
+		}
+		else {
+			command = command + "-DNDEBUG";
+		}
+		if (nFlags & FLAG_DOS) {
+			command = command + " -W-";
+		}
+		command = command + " -R -v -vi";
+	}
+	else {
+		if (nFlags & FLAG_DEBUG) {
+			command = "-c -v -vi- -R";
+		}
+		else {
+			command = "-c -O-d -O -Ob -Oe -Os -Ol -Oc -k- -Z";
+		}
+		if (nFlags & FLAG_MULTITHREADED) {
+			command = command + " -WM";
+		}
+		if (nFlags & FLAG_DLL) {
+			command = command + " -WD\n";
+		}
+		else {
+			command = command + " -W\n";
+		}
+		command = command + "-I" + GetShortPathName(GetIncludeDir()) + ";" +
+			GetShortPathName(compilerIncludeDir) + "\n";
+		command = command + "-D";
+		if (nFlags & FLAG_RTLDLL) {
+			command = command + "_RTLDLL;_BIDSDLL";
+		}
+		if (nFlags & FLAG_DLL) {
+			command = command + ";YYBUILDDLL";
+		}
+		if (nFlags & FLAG_DEBUG) {
+			command = command + ";YYDEBUG";
+		}
+		else {
+			command = command + ";NDEBUG -R -v -vi";
+		}
+	}
+
+	string commandFileName = GetSourceDir() + "\\temp.rsp";
+	DeleteFile(commandFileName);
+	AppendFile(commandFileName, command);
+
+	int i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			string command;
+			if (!(nFlags & FLAG_WIN32)) {
+				command = "bcc.exe @" + GetShortPathName(commandFileName) + " " +
+					GetShortPathName(fileName);
+			}
+			else {
+				command = "bcc32.exe +\"" + commandFileName + "\" \"" + fileName + "\"";
+			}
+			int nExitCode;
+			int bSuccess = Execute(command, nExitCode);
+			if (!bSuccess || nExitCode) {
+				Exit();
+			}
+		}
+		CloseSourceFileList(i);
+	}
+	DeleteFile(commandFileName);
+
+	if (nFlags & FLAG_DLL) {
+		// link
+		Output("Linking...");
+		command = "-Tpd -aa -c -x";
+		if (nFlags & FLAG_DEBUG) {
+			command = command + " -v";
+		}
+		command = command + " +\n -L" + GetShortPathName(compilerLibraryDir) + " +\n";
+		command = command + GetShortPathName(compilerLibraryDir) + "\\c0d32.obj";
+
+		int i = OpenSourceFileList(nSourceFileFlags);
+		if (i != -1) {
+			string fileName;
+			while (GetSourceFile(i, fileName)) {
+				command = command + " +\n" + GetShortPathName(GetSourceDir()) + "\\" + GetFileBaseName(fileName) + ".obj";
+			}
+			CloseSourceFileList(i);
+		}
+
+		command = command + ", +\n" + GetShortPathName(libraryDir) + "\\" + library + ",, +\n";
+		if (nFlags & FLAG_MULTITHREADED) {
+			command = command + "bidsfi.lib import32.lib cw32mti.lib,,";
+		}
+		else {
+			command = command + "bidsfi.lib import32.lib cw32i.lib,,";
+		}
+
+		string commandFileName = GetSourceDir() + "\\temp.rsp";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("tlink32 @" + GetShortPathName(commandFileName), nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+
+		// create import library
+		Output("Creating import library...");
+		string libname = GetShortPathName(libraryDir) + "\\" + GetFileBaseName(library) + ".lib";
+		string srcname = GetShortPathName(libraryDir) + "\\" + library;
+		bSuccess = Execute("implib " + libname + " " + srcname, nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+	}
+	else {
+		// create library
+		Output("Creating library...");
+		command = "/P32";
+		i = OpenSourceFileList(nSourceFileFlags);
+		if (i != -1) {
+			string fileName;
+			while (GetSourceFile(i, fileName)) {
+				command = command + " &\n+" + GetShortPathName(GetSourceDir()) + "\\" +
+					GetFileBaseName(GetShortPathName(fileName)) + ".obj";
+			}
+			CloseSourceFileList(i);
+		}
+
+		commandFileName = GetSourceDir() + "\\temp.rsp";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("tlib.exe " + GetShortPathName(libraryDir) + "\\" + library +
+			" @" + GetShortPathName(commandFileName), nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+	}
+
+	// delete object files
+	Output("Deleting object files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj");
+		}
+		CloseSourceFileList(i);
+	}
+}

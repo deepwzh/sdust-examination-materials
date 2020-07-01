@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Experiment3"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Experiment3\;CMake Files\Experiment1\;CMake Files\Experiment4\;CMake Files\Experiment2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experiment3">
+				<Option output="D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Experiment3.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+					<Add directory="/mingw/lib/gcc/mingw32/../../../include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 Experiment3"/>
+					<CompileFile command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experiment3/fast">
+				<Option output="D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Experiment3.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="g:\acm\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+					<Add directory="/mingw/lib/gcc/mingw32/../../../include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 Experiment3/fast"/>
+					<CompileFile command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="G:/ACM/MINGW/bin/mingw32-make.exe -f &quot;D:/Compilation principle/CompileExperiment/cmake-build-debug/Experiment3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/header/Blank.h">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/main.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/src/Blank.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/src/NonTerminal.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/src/Production.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/src/Symbol.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/src/Terminator.cpp">
+			<Option target="Experiment3"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Experiment3\"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Experiment1\"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Experiment4\"/>
+		</Unit>
+		<Unit filename="D:/Compilation principle/CompileExperiment/Experiment2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Experiment2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

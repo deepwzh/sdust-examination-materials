@@ -1,0 +1,233 @@
+// visual c++ (16-bit) libbuilder script file
+
+if (IsOption()) {
+	// name
+	SetName("Visual C++ (16-bit)");
+
+	// directory
+	SetDirectory("msvc16");
+
+	// libraries
+	AddLibrary("tyl.lib", 1);
+	AddLibrary("tyld.lib", 1);
+	AddLibrary("syl.lib", 1);
+	AddLibrary("syld.lib", 1);
+	AddLibrary("myl.lib", 1);
+	AddLibrary("myld.lib", 1);
+	AddLibrary("cyl.lib", 1);
+	AddLibrary("cyld.lib", 1);
+	AddLibrary("lyl.lib", 1);
+	AddLibrary("lyld.lib", 1);
+	AddLibrary("hyl.lib", 1);
+	AddLibrary("hyld.lib", 1);
+
+	// options
+	AddDirectoryOption("Compiler Bin Directory", "", "CompilerBinDir");
+	AddDirectoryOption("Compiler Include Directory", "", "CompilerIncludeDirectory");
+}
+else {
+	// flags
+	int FLAG_TINY = 0x01;		// tiny
+	int FLAG_SMALL = 0x02;		// small
+	int FLAG_MEDIUM = 0x04;		// medium
+	int FLAG_COMPACT = 0x08;	// compact
+	int FLAG_LARGE = 0x10;		// large
+	int FLAG_HUGE = 0x20;		// huge
+	int FLAG_DEBUG = 0x40;		// debug
+
+	// options
+	string compilerBinDir = GetDirectoryOption("Compiler Bin Directory");
+	string compilerIncludeDir = GetDirectoryOption("Compiler Include Directory");
+
+	// do some checks
+	if (compilerBinDir == "") {
+		Output("Error, please specify compiler bin directory in compiler options");
+		Exit();
+	}
+	if (compilerIncludeDir == "") {
+		Output("Error, please specify compiler include directory in compiler options");
+		Exit();
+	}
+
+	SetVariable("PATH", compilerBinDir);
+
+	int nFlags;
+	string library = GetLibrary();
+	if (library == "tyl.lib") {
+		nFlags = FLAG_TINY;
+	}
+	else if (library == "tyld.lib") {
+		nFlags = FLAG_TINY | FLAG_DEBUG;
+	}
+	else if (library == "syl.lib") {
+		nFlags = FLAG_SMALL;
+	}
+	else if (library == "syld.lib") {
+		nFlags = FLAG_SMALL | FLAG_DEBUG;
+	}
+	else if (library == "myl.lib") {
+		nFlags = FLAG_MEDIUM;
+	}
+	else if (library == "myld.lib") {
+		nFlags = FLAG_MEDIUM | FLAG_DEBUG;
+	}
+	else if (library == "cyl.lib") {
+		nFlags = FLAG_COMPACT;
+	}
+	else if (library =="cyld.lib") {
+		nFlags = FLAG_COMPACT | FLAG_DEBUG;
+	}
+	else if (library == "lyl.lib") {
+		nFlags = FLAG_LARGE;
+	}
+	else if (library == "lyld.lib") {
+		nFlags = FLAG_LARGE | FLAG_DEBUG;
+	}
+	else if (library == "hyl.lib") {
+		nFlags = FLAG_HUGE;
+	}
+	else if (library == "hyld.lib") {
+		nFlags = FLAG_HUGE | FLAG_DEBUG;
+	}
+
+	int nSourceFileFlags = SFLF_C | SFLF_CPP | SFLF_MBCS;
+
+	string libraryDir = GetLibraryDir();
+	string libraryPathName = libraryDir + "\\" + library;
+
+	// create directory
+	Output("Creating directory...");
+	MakeDir(libraryDir);
+
+	// delete library
+	Output("Deleting library...");
+	DeleteFile(libraryPathName);
+
+	// delete duplicate library
+	Output("Deleting duplicate library...");
+	DeleteFile(GetSourceDir() + "\\" + library);
+
+	// compile files
+	Output("Compiling files...");
+	string command;
+	if (nFlags & FLAG_DEBUG) {
+		command = "/nologo /c /W3 /WX /Gf /Z7";
+	}
+	else {
+		command = "/nologo /c /Gs /W3 /WX /Gf";
+	}
+	if (nFlags & FLAG_TINY) {
+		command = command + " /AT";
+	}
+	if (nFlags & FLAG_SMALL) {
+		command = command + " /AS";
+	}
+	if (nFlags & FLAG_MEDIUM) {
+		command = command + " /AM";
+	}
+	if (nFlags & FLAG_COMPACT) {
+		command = command + " /AC";
+	}
+	if (nFlags & FLAG_LARGE) {
+		command = command + " /AL";
+	}
+	if (nFlags & FLAG_HUGE) {
+		command = command + " /AH";
+	}
+	if (nFlags & FLAG_DEBUG) {
+		command = command + " /Od /D \"_DEBUG\" /D \"YYDEBUG\"";
+	}
+	else {
+		command = command + " /Ox /D \"NDEBUG\"";
+	}
+	command = command + " /FR /GA\n/I " + GetShortPathName(GetIncludeDir()) + "\n/I " +
+		GetShortPathName(compilerIncludeDir) + "\n";
+
+	int i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string commandFileName = GetSourceDir() + "\\" + "temp.cmd";
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(commandFileName);
+			AppendFile(commandFileName, command);
+			AppendFile(commandFileName, GetShortPathName(fileName) + "\n");
+			int nExitCode;
+			int bSuccess = Execute("cl.exe /nologo @" + GetShortPathName(commandFileName), nExitCode);
+			if (!bSuccess || nExitCode) {
+				Exit();
+			}
+			DeleteFile(commandFileName);
+		}
+		CloseSourceFileList(i);
+	}
+
+	// create library
+	// librarian strings (need to use file names because vc++ doesn't like tildes '~'
+	Output("Creating library...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		command = library + " /nologo\ny\n";
+		int bNewLine = 0;
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			if (bNewLine) {
+				command = command + " &\n";
+			}
+			command = command + "+" + GetFileBaseName(GetShortPathName(fileName)) + ".obj";
+			bNewLine = 1;
+		}
+		command = command + ";";
+		CloseSourceFileList(i);
+
+		string commandFileName = GetSourceDir() + "\\" + "temp.cmd";
+		DeleteFile(commandFileName);
+		AppendFile(commandFileName, command);
+		int nExitCode;
+		int bSuccess = Execute("lib.exe @" + GetShortPathName(commandFileName), nExitCode);
+		if (!bSuccess || nExitCode) {
+			Exit();
+		}
+		DeleteFile(commandFileName);
+	}
+
+	// copy library
+	Output("Copying library...");
+	CopyFile(GetSourceDir() + "\\" + library, libraryPathName);
+
+	// delete duplicate library
+	Output("Deleting duplicate library...");
+	DeleteFile(GetSourceDir() + "\\" + library);
+
+	// delete object files
+	Output("Deleting object files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".obj");
+		}
+		CloseSourceFileList(i);
+	}
+
+	// delete sbr files
+	Output("Deleting .SBR files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".sbr");
+		}
+		CloseSourceFileList(i);
+	}
+
+	// delete bak files
+	Output("Deleting .BAK files...");
+	i = OpenSourceFileList(nSourceFileFlags);
+	if (i != -1) {
+		string fileName;
+		while (GetSourceFile(i, fileName)) {
+			DeleteFile(GetSourceDir() + "\\" + GetFileBaseName(fileName) + ".bak");
+		}
+		CloseSourceFileList(i);
+	}
+}

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Compilation principle/CompileExperiment/src/Production.cpp
+Production.h
+D:/Compilation principle/CompileExperiment/src/Production.h
+
+D:/Compilation principle/CompileExperiment/src/Production.h
+bits/stdc++.h
+-
+
+D:/Compilation principle/CompileExperiment/src/main.cpp
+bits/stdc++.h
+-
+Production.h
+D:/Compilation principle/CompileExperiment/src/Production.h
+
