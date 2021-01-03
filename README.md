@@ -50,6 +50,10 @@ TODO:
 - [ZhiHong_Xu](https://github.com/LearnerHong)
 - [NzzzzN](https://github.com/NzzzzN)
 - [yaoyaoq](https://github.com/yaoyaoq)
+- [ZHJ0125](https://github.com/ZHJ0125)
+- [sumover](https://github.com/sumover)
+- [wuyuesong](https://github.com/wuyuesong)
+
 ## 5. 许可与版权
 [CC-BY-NC-SA：署名-非商业性使用-相同方式共享](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)
 
